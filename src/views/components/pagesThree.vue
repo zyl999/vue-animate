@@ -25,9 +25,35 @@ export default {
     setTimeout(() => {
       this.npgressW = "100%";
     }, 1000);
-    setTimeout(() => {
-      this.$emit("update:show", 4);
-    }, 3000);
+    this.test();
+  },
+  methods: {
+    test() {
+      let config = {
+        url: "/api/v1/categorytest/index/computeScore",
+        method: "post",
+      };
+      let data = {
+        result: [
+          { type_id: "1", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "2", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "3", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "4", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "5", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "6", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "7", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "8", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "9", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "10", like_nums: 2, dis_like_nums: 0 },
+        ],
+      };
+      this.$ajax(config, data).then((res) => {
+        console.log("测试", res);
+        if (res.code == 200) {
+          this.$emit("update:show", 4);
+        }
+      });
+    },
   },
 };
 </script>

@@ -20,22 +20,37 @@ export default {
     pagesFour,
   },
   created() {
-    // 获取图片
-    this.getImgList();
+    // 测试结果
+    this.text();
   },
   data() {
     return {
-      tabIndex: 2,
+      tabIndex: 4,
+      someList: [], //测试图片
     };
   },
   methods: {
-    getImgList() {
+    text() {
       let config = {
-        url: "/api/v1/categorytest/index/pictureList",
-        method: "get",
+        url: "/api/v1/categorytest/index/computeScore",
+        method: "post",
       };
-      this.$ajax(config, {}).then((res) => {
-        console.log("请求结果", res);
+      let data = {
+        result: [
+          { type_id: "1", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "2", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "3", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "4", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "5", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "6", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "7", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "8", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "9", like_nums: 1, dis_like_nums: 1 },
+          { type_id: "10", like_nums: 2, dis_like_nums: 0 },
+        ],
+      };
+      this.$ajax(config, data).then((res) => {
+        console.log("计算得分", res);
       });
     },
   },

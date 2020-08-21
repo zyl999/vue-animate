@@ -5,6 +5,8 @@ import store from "./store";
 import "lib-flexible";
 import "./style/index.scss";
 import { ajax } from "./http";
+import echarts from "echarts";
+Vue.prototype.$echarts = echarts;
 Vue.prototype.$ajax = ajax;
 
 Vue.config.productionTip = false;

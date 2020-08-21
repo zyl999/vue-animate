@@ -11,15 +11,15 @@ const createService = (customization) => {
 			}
 			// 可以在请求头添加token等值!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			config.headers["Access-Token"] = "abd876ad3f6a4108fbd26a27decffca6";
-			config.headers["utmUis"] = "";
-			config.headers["utmContent"] = "";
-			config.headers["utmTerm"] = "";
-			config.headers["utmPlan"] = "";
-			config.headers["utmUnit"] = "";
-			config.headers["utmSucai"] = "";
-			config.headers["source"] = "";
-			config.headers["platformId"] = "4";
-			config.headers["cityId"] = "1";
+			// config.headers["utmUis"] = "";
+			// config.headers["utmContent"] = "";
+			// config.headers["utmTerm"] = "";
+			// config.headers["utmPlan"] = "";
+			// config.headers["utmUnit"] = "";
+			// config.headers["utmSucai"] = "";
+			// config.headers["source"] = "";
+			// config.headers["platformId"] = "4";
+			// config.headers["cityId"] = "1";
 			return config;
 		},
 		(error) => {
