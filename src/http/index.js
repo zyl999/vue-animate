@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getToken } from "../utils/auth";
 import store from "../utils/storage";
+import wx from "weixin-js-sdk";
 
 const env = process.env.NODE_ENV;
 let baseURL = "";
@@ -51,10 +52,9 @@ const createService = (customization) => {
 			//   const errorMsg = msg || 'TOKEN已经过期, 请重新登录!'
 			//   return Promise.reject(errorMsg)
 			// }
-			if (code == 406) {
+			if (code == 406 || code == 401) {
 				// token 无效
-				// 重新登录
-				console.log("dnegl");
+				wx.miniProgram.navigateTo({ url: "/pages/login/login" });
 				return Promise.reject(msg);
 			}
 			return res;
