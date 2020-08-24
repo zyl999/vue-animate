@@ -2,7 +2,7 @@
 	<div class="card_wrap">
 		<div class="card">
 			<div class="title">
-				<span>{{ userName }}</span> 的风格测试结果
+				<span>{{ userInfo.nick_name }}</span> 的风格测试结果
 			</div>
 			<div class="desc">
 				<img class="img" src="../../assets/quot_left.png" alt />
@@ -19,7 +19,11 @@
 			<div class="comment">{{ explanation.content }}</div>
 			<div class="chart">
 				<div class="pic" ref="chart"></div>
-				<img src="https://hjapi.51hejia.com/mmexport1592376066582.jpg" alt class="avater" />
+				<img
+					:src="userInfo.user_img ? userInfo.user_img : 'https://userimg.51hejia.com/user_default_img.png'"
+					alt
+					class="avater"
+				/>
 			</div>
 		</div>
 		<div class="button" @click="resetTest">
@@ -49,6 +53,11 @@ export default {
 	components: {},
 	data() {
 		return {
+			userInfo: {
+				user_name: "",
+				nick_name: "",
+				user_img: "",
+			},
 			userName: "郭仙女",
 			arr: ["现代简约", "美式", "欧式", "地中海", "日式"],
 			explanation: {
@@ -67,6 +76,9 @@ export default {
 			this.$ajax(api_getTestResult, {}).then((res) => {
 				console.log("测试结果", res);
 				if (res.code == 200) {
+					if (res.result.user_info) {
+						this.userInfo = res.result.user_info;
+					}
 					let categoryName = [];
 					let explanation = res.result.explanation;
 					this.explanation = explanation;
@@ -129,8 +141,6 @@ export default {
 		},
 		// 找设计师
 		goDesigner() {
-			console.log(wx.miniProgram.navigateTo);
-			// /index/index?phone=18012121212
 			wx.miniProgram.navigateTo({ url: "/pages_designer/pages_designer" });
 		},
 		// 重新测试
@@ -141,6 +151,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+// @font-face {
+// 	font-family: "hzgb";
+// 	src: url("https://userimg.51hejia.com/FZDBSJW.ttf");
+// }
+@import "../../font/font.css";
 .card_wrap {
 	padding-top: 30px;
 }
@@ -176,7 +191,7 @@ export default {
 		.content {
 			height: 112px;
 			font-size: 72px;
-			font-family: "FZDBSJW--GB1-0,FZDBSJW--GB1";
+			font-family: "hzgb";
 			display: flex;
 			flex-direction: row;
 			align-items: center;
