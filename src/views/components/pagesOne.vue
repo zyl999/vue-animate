@@ -40,6 +40,10 @@ export default {
       default: 2,
     },
   },
+  mounted() {
+    this.inKey = this.inArr.map((v) => shortId.generate());
+    this.outKey = this.outArr.map((v) => shortId.generate());
+  },
   data() {
     return {
       num: 786969,
@@ -83,10 +87,6 @@ export default {
       inKey: [],
       outKey: [],
     };
-  },
-  mounted() {
-    this.inKey = this.inArr.map((v) => shortId.generate());
-    this.outKey = this.outArr.map((v) => shortId.generate());
   },
   methods: {
     goTest() {
@@ -158,7 +158,7 @@ export default {
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        animation: myfirst 4s ease infinite alternate;
+        animation: myfirst 2s ease infinite alternate;
       }
       span {
         margin-top: 6px;

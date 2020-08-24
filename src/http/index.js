@@ -1,8 +1,22 @@
 import axios from "axios";
+import { getToken } from "../utils/auth";
+import store from "../utils/storage";
 
+const env = process.env.NODE_ENV;
+let baseURL = "";
+if (env === "development") {
+	// 本地环境
+	baseURL = "/api";
+} else if (env === "production") {
+	// 生产环境
+	baseURL = "https://test-api.jbh58.com";
+} else if (env === "test") {
+	// 测试环境
+	baseURL = "https://test-api.jbh58.com";
+}
 const createService = (customization) => {
 	// 创建axios
-	const service = axios.create();
+	const service = axios.create({ baseURL });
 	// 请求拦截
 	service.interceptors.request.use(
 		(config) => {
@@ -10,7 +24,8 @@ const createService = (customization) => {
 				config = { ...config, ...customization };
 			}
 			// 可以在请求头添加token等值!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			config.headers["Access-Token"] = "abd876ad3f6a4108fbd26a27decffca6";
+			// config.headers['Access-Token'] = 'abd876ad3f6a4108fbd26a27decffca6'
+			config.headers["Access-Token"] = getToken();
 			// config.headers["utmUis"] = "";
 			// config.headers["utmContent"] = "";
 			// config.headers["utmTerm"] = "";
@@ -31,12 +46,17 @@ const createService = (customization) => {
 		(response) => {
 			const res = response.data;
 			// 可以在该处拦截错误信息，如下：!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			// const { code, status, msg } = res
-			//
+			const { code, msg } = res;
 			// if ((code && code === 10114) || (status && status === 10114 || status === '40101' || status === '10114')) {
 			//   const errorMsg = msg || 'TOKEN已经过期, 请重新登录!'
 			//   return Promise.reject(errorMsg)
 			// }
+			if (code == 406) {
+				// token 无效
+				// 重新登录
+				console.log("dnegl");
+				return Promise.reject(msg);
+			}
 			return res;
 		},
 		(error) => {

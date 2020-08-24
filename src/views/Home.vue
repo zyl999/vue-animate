@@ -2,15 +2,20 @@
   <div class="home">
     <pagesOne v-if="tabIndex == 1" :show.sync="tabIndex" />
     <pagesTwo v-if="tabIndex == 2" :show.sync="tabIndex" />
-    <pagesThree v-if="tabIndex == 3" :show.sync="tabIndex" />
+    <pagesThree v-if="tabIndex == 3" :choosedList="choosedList" :show.sync="tabIndex" />
     <pagesFour v-if="tabIndex == 4" :show.sync="tabIndex" />
   </div>
 </template>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
 <script>
+import Bus from "../utils/bus";
 import pagesOne from "./components/pagesOne.vue";
 import pagesTwo from "./components/pagesTwo.vue";
 import pagesThree from "./components/pagesThree.vue";
 import pagesFour from "./components/pagesFour.vue";
+import { setToken } from "../utils/auth";
+import store from "../utils/storage";
+
 export default {
   name: "Home",
   components: {
@@ -19,41 +24,41 @@ export default {
     pagesThree,
     pagesFour,
   },
-  created() {
-    // 测试结果
-    this.text();
-  },
   data() {
     return {
-      tabIndex: 4,
+      tabIndex: 0,
       someList: [], //测试图片
+      choosedList: [], // 喜欢不喜欢勾选的值
     };
   },
-  methods: {
-    text() {
-      let config = {
-        url: "/api/v1/categorytest/index/computeScore",
-        method: "post",
-      };
-      let data = {
-        result: [
-          { type_id: "1", like_nums: 1, dis_like_nums: 1 },
-          { type_id: "2", like_nums: 1, dis_like_nums: 1 },
-          { type_id: "3", like_nums: 1, dis_like_nums: 1 },
-          { type_id: "4", like_nums: 1, dis_like_nums: 1 },
-          { type_id: "5", like_nums: 1, dis_like_nums: 1 },
-          { type_id: "6", like_nums: 1, dis_like_nums: 1 },
-          { type_id: "7", like_nums: 1, dis_like_nums: 1 },
-          { type_id: "8", like_nums: 1, dis_like_nums: 1 },
-          { type_id: "9", like_nums: 1, dis_like_nums: 1 },
-          { type_id: "10", like_nums: 2, dis_like_nums: 0 },
-        ],
-      };
-      this.$ajax(config, data).then((res) => {
-        console.log("计算得分", res);
+  mounted() {
+    Bus.$on("getParams", (data) => {
+      this.choosedList = data;
+    });
+    //获取地址栏的值
+    let data = window.location.search.substr(1);
+    let dataArr = data.split("&");
+    if (dataArr[0] != "") {
+      let __dealDataArr = [];
+      dataArr.forEach((item) => {
+        let obj = {};
+        obj.key = item.split("=")[0];
+        obj.value = item.split("=")[1];
+        __dealDataArr.push(obj);
       });
-    },
+      console.log(__dealDataArr, "获取数组");
+      // let token = 'abd876ad3f6a4108fbd26a27decffca6'
+      let token = __dealDataArr.filter((v) => {
+        return v.key == "token";
+      })[0].value;
+      console.log(token, "获取token值");
+      setToken(token);
+      store.set("a", JSON.stringify(__dealDataArr));
+    }
+
+    this.tabIndex = 1;
   },
+  methods: {},
 };
 </script>
 <style lang="scss" scoped>

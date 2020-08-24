@@ -1,6 +1,10 @@
 <template>
-  <div class="wrap" :style="{height:h+'px',background:parentBgc}">
-    <div class="son" :style="{width:w,height:h+'px',background:bgc,transitionDuration: sec}"></div>
+  <div class="wrap" :style="{height:h+'px',background:parentBgc}" :class="{'bd':radius}">
+    <div
+      class="son"
+      :style="{width:w,height:h+'px',background:bgc,transitionDuration: sec}"
+      :class="{'bd':radius}"
+    ></div>
   </div>
 </template>
 <script>
@@ -32,6 +36,11 @@ export default {
       type: String,
       default: "0.5s",
     },
+    // 进度条圆角
+    radius: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {};
@@ -41,8 +50,16 @@ export default {
 <style lang="scss" scoped>
 .wrap {
   width: 100%;
+  &.bd {
+    border-radius: 10px;
+    // overflow: hidden;
+  }
   .son {
     transition: all 0.5s;
+    &.bd {
+      border-radius: 10px;
+      overflow: hidden;
+    }
   }
 }
 </style>

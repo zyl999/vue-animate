@@ -28,6 +28,7 @@
 </template>
 <script>
 import detectPrefixes from "../../utils/detect-prefixes.js";
+import Bus from "../../utils/bus";
 export default {
   props: {
     stackinit: {
@@ -69,6 +70,7 @@ export default {
         zIndex: 10,
       },
       limit: false, // 限制上下滑动能否划出范围
+      choosedList: [], // 划过的列表，里面装着喜欢和不喜欢的图片信息
     };
   },
   computed: {
@@ -208,8 +210,6 @@ export default {
       }
     },
     touchend(e) {
-      console.log("滚动结束", "progress", this.temporaryData.currentPage);
-
       this.$emit("change", "progress", this.temporaryData.currentPage, 0);
       this.temporaryData.tracking = false;
       this.temporaryData.animation = true;
@@ -246,20 +246,35 @@ export default {
       this.temporaryData.lastPosHeight = this.temporaryData.posheight;
       this.temporaryData.lastRotate = this.temporaryData.rotate;
       this.temporaryData.lastZindex = 20;
-      console.log(
-        "最后一张",
-        this.temporaryData.currentPage === this.pages.length - 1,
-        "this.temporaryData.currentPage",
-        this.temporaryData.currentPage
-      );
       let currentpage = this.temporaryData.currentPage + 1;
       // 更新进度条
       let pageGress = (currentpage / this.pages.length) * 100;
-      this.$emit("progressHandle", pageGress);
+      // 处理获取喜欢、不喜欢的值
+      console.log(this.temporaryData.lastRotate, "获取偏移值");
+      let data = JSON.parse(
+        JSON.stringify(this.pages[this.temporaryData.currentPage])
+      );
+      delete data.url;
+      if (this.temporaryData.lastRotate > 0) {
+        // 不喜欢，往左滑动
+        Object.assign(data, { likeFlag: false });
+      } else {
+        // 喜欢，往右滑动
+        Object.assign(data, { likeFlag: true });
+      }
+      this.getParams(data);
+      this.choosedList = this.choosedList.map((item) => {
+        delete item.likeFlag;
+        delete item.opacity;
+        delete item.progress;
+        return item;
+      });
       // 切换页面
       if (this.temporaryData.currentPage === this.pages.length - 1) {
-        return;
+        Bus.$emit("getParams", this.choosedList);
+        // return;
       }
+      this.$emit("progressHandle", pageGress);
       // 循环currentPage
       this.temporaryData.currentPage = this.temporaryData.currentPage + 1;
       // this.temporaryData.currentPage === this.pages.length - 1
@@ -297,7 +312,7 @@ export default {
       this.temporaryData.poswidth = -width;
       this.temporaryData.posheight = 0;
       this.temporaryData.opacity = 0;
-      this.temporaryData.rotate = "-3";
+      this.temporaryData.rotate = 3;
       this.temporaryData.swipe = true;
       this.nextTick();
     },
@@ -309,7 +324,7 @@ export default {
       this.temporaryData.poswidth = width;
       this.temporaryData.posheight = 0;
       this.temporaryData.opacity = 0;
-      this.temporaryData.rotate = "3";
+      this.temporaryData.rotate = -3;
       this.temporaryData.swipe = true;
       this.nextTick();
     },
@@ -361,7 +376,7 @@ export default {
         style["opacity"] = "1";
         style["transform"] =
           "translate3D(0," +
-          -2 * 60 * (perIndex - this.offsetRatio) +
+          -1.6 * 60 * (perIndex - this.offsetRatio) +
           "px" +
           "," +
           -1 * 60 * (perIndex - this.offsetRatio) +
@@ -449,6 +464,35 @@ export default {
             (this.temporaryData.animation ? 300 : 0) + "ms";
         }
         return style;
+      }
+    },
+    // 处理返回的参数如 [{type_id: '1', like_nums: 10, dis_like_nums: 11}]
+    getParams(item) {
+      let like_nums = item.likeFlag ? 1 : 0;
+      let dis_like_nums = item.likeFlag ? 0 : 1;
+      if (this.choosedList && this.choosedList.length === 0) {
+        Object.assign(item, {
+          like_nums,
+          dis_like_nums,
+        });
+        this.choosedList.push(item);
+      } else {
+        if (this.choosedList.some((data) => data.type_id === item.type_id)) {
+          let index = this.choosedList.findIndex(
+            (value) => value.type_id === item.type_id
+          );
+          if (item.likeFlag) {
+            this.choosedList[index].like_nums++;
+          } else {
+            this.choosedList[index].dis_like_nums++;
+          }
+        } else {
+          Object.assign(item, {
+            like_nums,
+            dis_like_nums,
+          });
+          this.choosedList.push(item);
+        }
       }
     },
   },

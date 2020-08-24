@@ -32,6 +32,8 @@
 <script>
 import stack from "./stack.vue";
 import nprogress from "./nprogress.vue";
+import { api_getImgList } from "../../api";
+
 export default {
   // el: "#stack",
   data() {
@@ -61,11 +63,7 @@ export default {
   },
   methods: {
     getImgList() {
-      let config = {
-        url: "/api/v1/categorytest/index/pictureList",
-        method: "get",
-      };
-      this.$ajax(config, {}).then((res) => {
+      this.$ajax(api_getImgList, {}).then((res) => {
         console.log("请求结果", res);
         if (res.code == 200) {
           let result = res.result;
@@ -84,11 +82,11 @@ export default {
       this.$refs.stack.$emit("next");
     },
     // 进度条
-    progressHandle(data) {
+    progressHandle(pageGress) {
       // 更新进度条
-      console.log("进度条", data);
-      this.npgressW = data + "%";
-      if (data == 100) {
+      console.log("进度条", pageGress);
+      this.npgressW = pageGress + "%";
+      if (pageGress == 100) {
         // 最后一张跳转页面
         this.$emit("update:show", 3);
       }
@@ -118,9 +116,10 @@ export default {
 <style lang="scss" scoped>
 .wrap {
   .title {
-    height: 140px;
+    height: 84px;
   }
 }
+
 .stack-wrapper {
   margin: 0 auto;
   position: relative;
@@ -133,18 +132,21 @@ export default {
   // overflow: hidden;
   // border-radius: 20px;
 }
+
 .controls {
-  margin-top: 100px;
+  margin-top: 60px;
   display: flex;
   padding: 0px 146px;
   align-items: center;
   justify-content: space-between;
+
   .left {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
   .button {
     width: 110px;
     height: 110px;
@@ -154,6 +156,7 @@ export default {
     align-items: center;
     border-radius: 50%;
     background: #ffffff;
+
     img {
       width: 54px;
       // height: 46px;
@@ -162,6 +165,7 @@ export default {
       transition: all 0.5s;
     }
   }
+
   span {
     margin-top: 20px;
     font-family: "PingFangSC-Regular,PingFang SC";
