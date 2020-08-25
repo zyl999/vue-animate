@@ -2,6 +2,7 @@ import axios from "axios";
 import { getToken } from "../utils/auth";
 import store from "../utils/storage";
 import wx from "weixin-js-sdk";
+import initHandel from "../utils/common.js";
 
 const env = process.env.NODE_ENV;
 let baseURL = "";
@@ -10,7 +11,7 @@ if (env === "development") {
 	baseURL = "/api";
 } else if (env === "production") {
 	// 生产环境
-	baseURL = "https://test-api.jbh58.com";
+	baseURL = "https://hj-service.51hejia.com";
 } else if (env === "test") {
 	// 测试环境
 	baseURL = "https://test-api.jbh58.com";
@@ -53,8 +54,23 @@ const createService = (customization) => {
 			//   return Promise.reject(errorMsg)
 			// }
 			if (code == 406 || code == 401) {
+				let pladFormId = store.get("pladFormId");
+				if (pladFormId != 4) {
+					initHandel();
+				}
 				// token 无效
-				wx.miniProgram.navigateTo({ url: "/pages/login/login" });
+				if (pladFormId == 4) {
+					wx.miniProgram.navigateTo({ url: "/pages/login/login?source=webView" });
+				} else {
+					// 返回app的登录页
+					callNativePage({
+						// data: { msg : 'test send msg' },
+						method: "webLogin",
+						callback: function(responseData) {
+							alert("来源于原生的反馈信息", responseData);
+						},
+					});
+				}
 				return Promise.reject(msg);
 			}
 			return res;
