@@ -98,11 +98,13 @@ export default {
 				return;
 			}
 			// 控制爱心的大小
-			if (progess > 0.8) {
-				this.radioW = 54 * 1.5;
-			} else if (progess > 0.6) {
+			if (progess > 0.01) {
+				this.radioW = 54 * 1.3;
+			} else if (progess > 0.2) {
+				this.radioW = 54 * 1.35;
+			} else if (progess > 0.4) {
 				this.radioW = 54 * 1.4;
-			} else if (progess > 0.3) {
+			} else if (progess > 0.6) {
 				this.radioW = 54 * 1.2;
 			} else {
 				this.radioW = 54;

@@ -14,7 +14,8 @@ if (env === "development") {
 	baseURL = "https://hj-service.51hejia.com";
 } else if (env === "test") {
 	// 测试环境
-	baseURL = "https://test-api.jbh58.com";
+	// baseURL = "https://test-api.jbh58.com";
+	baseURL = "/api";
 }
 const createService = (customization) => {
 	// 创建axios
