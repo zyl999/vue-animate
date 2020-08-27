@@ -56,7 +56,7 @@ const createService = (customization) => {
 			// }
 			if (code == 406 || code == 401) {
 				let pladFormId = store.get("pladFormId");
-				alert(pladFormId);
+				// alert(pladFormId);
 				// token 无效
 				if (pladFormId == 4) {
 					wx.miniProgram.navigateTo({ url: "/pages/login/login?source=webView" });
