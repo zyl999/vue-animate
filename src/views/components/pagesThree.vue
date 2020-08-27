@@ -33,6 +33,9 @@ export default {
       npgressW: "0%",
     };
   },
+  created() {
+    document.title = "风格测试";
+  },
   mounted() {
     setTimeout(() => {
       this.npgressW = "100%";
@@ -41,6 +44,18 @@ export default {
   },
   methods: {
     test(data) {
+      console.log("data", data);
+      let dislikeArr = data.filter((item) => {
+        return item.dis_like_nums == 2;
+      });
+      console.log("dislikeArr", dislikeArr);
+      if (dislikeArr.length >= 10) {
+        // 都为不喜欢
+        setTimeout((_) => {
+          this.$emit("update:show", 5);
+        }, 2000);
+        return;
+      }
       this.$ajax(api_getTestData, { result: data }).then((res) => {
         console.log("测试", res);
         if (res.code == 200) {

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getToken } from "../utils/auth";
-import store from "../utils/storage";
+import storage from "../utils/storage";
 import wx from "weixin-js-sdk";
+import store from "../store";
 // import Bridge from "../utils/JSbridge.js";
 
 const env = process.env.NODE_ENV;
@@ -55,15 +56,21 @@ const createService = (customization) => {
 			//   return Promise.reject(errorMsg)
 			// }
 			if (code == 406 || code == 401) {
-				let pladFormId = store.get("pladFormId");
-				// alert(pladFormId);
-				// token 无效
-				if (pladFormId == 4) {
-					wx.miniProgram.navigateTo({ url: "/pages/login/login?source=webView" });
+				let getTabIdx = store.getters["getTabIdx"];
+				// alert("getTabIdx", getTabIdx);
+				if (getTabIdx == 1) {
 				} else {
-					// alert(1);
-					// 返回app的登录页
+					let pladFormId = storage.get("pladFormId");
+					// alert(pladFormId);
+					// token 无效
+					if (pladFormId == 4) {
+						wx.miniProgram.navigateTo({ url: "/pages/login/login?source=webView" });
+					} else {
+						// alert(1);
+						// 返回app的登录页
+					}
 				}
+
 				return Promise.reject(msg);
 			}
 			return res;

@@ -75,6 +75,7 @@ export default {
   },
   created() {
     this.result();
+    document.title = "测试结果";
   },
   methods: {
     result() {

@@ -42,6 +42,7 @@ export default {
     },
   },
   created() {
+    // document.title = "风格测试";
     this.$ajax(categorytestIndex, {}).then((res) => {
       console.log("首页数据", res);
       if (res.code == 200) {
@@ -84,15 +85,17 @@ export default {
         console.log("测试结果", res);
         if (res.code == 200) {
           this.result = res.result;
-          if (this.result && this.result.explanation) {
-            this.$emit("update:show", 4);
-          } else {
-            this.$emit("update:show", 2);
-          }
+          // if (this.result && this.result.explanation) {
+          //   this.$emit("update:show", 4);
+          // } else {
+          //   this.$emit("update:show", 2);
+          // }
+          this.$emit("update:show", 2);
         }
       });
     },
     goTest() {
+      this.$store.commit("stTabIdx", 2);
       this.getResult();
       this.getAPPDate();
     },
@@ -120,24 +123,6 @@ export default {
   100% {
     background: rgba(255, 166, 176, 1);
   }
-  // 0% {
-  //   background: rgba(255, 166, 176, 0.4);
-  // }
-  // 20% {
-  //   background: rgba(255, 166, 176, 0.8);
-  // }
-  // 40% {
-  //   background: rgba(255, 166, 176, 1);
-  // }
-  // 60% {
-  //   background: rgba(255, 166, 176, 0.8);
-  // }
-  // 80% {
-  //   background: rgba(255, 166, 176, 0.6);
-  // }
-  // 100% {
-  //   background: rgba(255, 166, 176, 0.4);
-  // }
 }
 .wrap {
   padding-top: 100px;
