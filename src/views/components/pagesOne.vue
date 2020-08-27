@@ -120,6 +120,24 @@ export default {
   100% {
     background: rgba(255, 166, 176, 1);
   }
+  // 0% {
+  //   background: rgba(255, 166, 176, 0.4);
+  // }
+  // 20% {
+  //   background: rgba(255, 166, 176, 0.8);
+  // }
+  // 40% {
+  //   background: rgba(255, 166, 176, 1);
+  // }
+  // 60% {
+  //   background: rgba(255, 166, 176, 0.8);
+  // }
+  // 80% {
+  //   background: rgba(255, 166, 176, 0.6);
+  // }
+  // 100% {
+  //   background: rgba(255, 166, 176, 0.4);
+  // }
 }
 .wrap {
   padding-top: 100px;
@@ -168,7 +186,8 @@ export default {
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        animation: myfirst 2s ease infinite alternate;
+        // animation: myfirst 2s infinite;
+        animation: myfirst 1.2s ease infinite alternate;
       }
       span {
         margin-top: 6px;
@@ -181,42 +200,42 @@ export default {
     }
     .in {
       &.in0 {
-        right: 202px;
+        right: 198px;
         top: 120px;
       }
       &.in1 {
-        right: 72px;
-        top: 264px;
+        right: 70px;
+        top: 262px;
       }
       &.in2 {
-        right: 174px;
-        bottom: 104px;
+        right: 170px;
+        bottom: 100px;
       }
       &.in3 {
-        left: 152px;
-        top: 364px;
+        left: 146px;
+        top: 362px;
       }
       &.in4 {
-        left: 110px;
+        left: 106px;
         top: 192px;
       }
     }
     .out {
       &.out0 {
-        left: 282px;
+        left: 276px;
         top: 6px;
       }
       &.out1 {
-        right: 74px;
-        top: 50px;
+        right: 70px;
+        top: 48px;
       }
       &.out2 {
         right: -8px;
-        top: 165px;
+        top: 162px;
       }
       &.out3 {
         right: -10px;
-        top: 336px;
+        top: 334px;
       }
       &.out4 {
         right: 72px;
@@ -227,24 +246,24 @@ export default {
         left: 280px;
       }
       &.out6 {
-        left: 54px;
-        bottom: 42px;
+        left: 52px;
+        bottom: 34px;
       }
       &.out7 {
-        left: -12px;
+        left: -16px;
         top: 320px;
       }
       &.out8 {
-        left: -16px;
-        top: 210px;
+        left: -24px;
+        top: 212px;
       }
       &.out9 {
-        left: 24px;
-        top: 104px;
+        left: 20px;
+        top: 108px;
       }
       &.out10 {
-        left: 120px;
-        top: 22px;
+        left: 114px;
+        top: 24px;
       }
     }
   }

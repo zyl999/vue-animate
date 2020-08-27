@@ -101,6 +101,7 @@ export default {
     },
     initCharts(score_list, scorArr) {
       let fontSize = this.device ? 13 : 26;
+      let potion = this.device ? ["50%", "53%"] : ["50%", "50%"];
       let myChart = this.$echarts.init(this.$refs.chart);
       console.log(this.$refs.chart); // 绘制图表
       myChart.setOption({
@@ -113,7 +114,7 @@ export default {
               },
             },
             indicator: score_list,
-            center: ["50%", "50%"],
+            center: potion,
             startAngle: 90,
             splitNumber: 3,
             splitArea: {
@@ -170,9 +171,10 @@ export default {
   border-radius: 40px;
   overflow: hidden;
   margin: 0px auto;
-  padding: 38px 34px;
+  padding: 38px 0px;
   box-sizing: border-box;
   .title {
+    padding: 0px 34px;
     color: #333333;
     font-size: 30px;
     font-family: "PingFangSC-Medium,PingFang SC";
@@ -237,6 +239,7 @@ export default {
     color: #333333;
     line-height: 36px;
     margin-bottom: 30px;
+    padding: 0px 34px;
   }
   .chart {
     position: relative;
