@@ -6,6 +6,8 @@ import "lib-flexible";
 import "./style/index.scss";
 import { ajax } from "./http";
 import echarts from "echarts";
+// import Bridge from "./utils/JSbridge.js";
+// Vue.prototype.$bridge = Bridge;
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$ajax = ajax;
 

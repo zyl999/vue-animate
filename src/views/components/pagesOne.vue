@@ -94,6 +94,13 @@ export default {
     },
     goTest() {
       this.getResult();
+      this.getAPPDate();
+    },
+    getAPPDate() {
+      // this.$bridge.callHandler("shareHandel", { name: "zs" }, (data) => {
+      //   // 处理返回数据
+      //   alert(data);
+      // });
     },
   },
 };

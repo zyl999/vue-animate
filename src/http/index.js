@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "../utils/auth";
 import store from "../utils/storage";
 import wx from "weixin-js-sdk";
-import initHandel from "../utils/common.js";
+// import Bridge from "../utils/JSbridge.js";
 
 const env = process.env.NODE_ENV;
 let baseURL = "";
@@ -56,21 +56,13 @@ const createService = (customization) => {
 			// }
 			if (code == 406 || code == 401) {
 				let pladFormId = store.get("pladFormId");
-				if (pladFormId != 4) {
-					initHandel();
-				}
+				alert(pladFormId);
 				// token 无效
 				if (pladFormId == 4) {
 					wx.miniProgram.navigateTo({ url: "/pages/login/login?source=webView" });
 				} else {
+					// alert(1);
 					// 返回app的登录页
-					callNativePage({
-						// data: { msg : 'test send msg' },
-						method: "webLogin",
-						callback: function(responseData) {
-							alert("来源于原生的反馈信息", responseData);
-						},
-					});
 				}
 				return Promise.reject(msg);
 			}

@@ -1,0 +1,37 @@
+{
+	"deploy": {
+		"packages": [
+			{
+				"name": "风格测试项目部署",
+				"files": ["dist/**"],
+				"button": {
+					"text": "部署至PHP测试机(商户端)",
+					"targets": ["测试环境服务器(sh)"]
+				}
+			}
+		],
+		"targets": [
+			{
+				"type": "sftp",
+				"name": "测试环境服务器(sh)",
+				"description": "测试环境服务器(sh)",
+
+				"dir": "/data/wwwroot/H5/test-fg.51hejia.com",
+				"host": "47.100.50.15",
+				"port": 22,
+				"user": "test",
+				"password": "hD08hje2GD",
+
+				"connected": [
+					"rm -r /data/wwwroot/H5/test-fg.51hejia.com/*",
+					{
+						"command": "whoami",
+						"writeOutputTo": "current_bash_user",
+						"executeBeforeWriteOutputTo": "$others['current_bash_user'].trim()"
+					}
+				],
+				"beforeUpload": ["rm ${remote_file}"]
+			}
+		]
+	}
+}
