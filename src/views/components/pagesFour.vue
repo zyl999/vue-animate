@@ -31,7 +31,7 @@
 				<img src="../../assets/menue.png" alt />
 				<span>重新测试</span>
 			</div>
-			<div class="center" v-if="pladFormId != 4">
+			<div class="center" v-if="pladFormId != 4" @click.stop="share">
 				<img src="../../assets/share.png" alt />
 				<span>分享</span>
 			</div>
@@ -44,6 +44,7 @@
 import { api_getTestResult } from "../../api";
 import wx from "weixin-js-sdk";
 import store from "../../utils/storage";
+import jsBridgeApp from "../../utils/util.js";
 export default {
 	props: {
 		pladFormId: {
@@ -149,11 +150,17 @@ export default {
 			let pladFormId = store.get("pladFormId");
 			if (pladFormId == 4) {
 				wx.miniProgram.navigateTo({ url: "/pages_designer/pages_designer" });
+			} else {
+				jsBridgeApp("designer", {});
 			}
 		},
 		// 重新测试
 		resetTest() {
 			this.$emit("update:show", 2);
+		},
+		// 分享嵌套在app上会有
+		share() {
+			jsBridgeApp("shareHande", {});
 		},
 	},
 };

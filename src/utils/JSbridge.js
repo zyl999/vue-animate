@@ -22,8 +22,24 @@ function setupWebViewJavascriptBridge(callback) {
 
 	//iOS使用
 	if (isiOS) {
+		// if (window.WebViewJavascriptBridge) {
+		// 	return callback(window.WebViewJavascriptBridge);
+		// }
+		// if (window.WVJBCallbacks) {
+		// 	return window.WVJBCallbacks.push(callback);
+		// }
+		// window.WVJBCallbacks = [callback];
+		// var WVJBIframe = document.createElement("iframe");
+		// WVJBIframe.style.display = "none";
+		// WVJBIframe.src = "wvjbscheme://__BRIDGE_LOADED__";
+		// document.documentElement.appendChild(WVJBIframe);
+		// setTimeout(() => {
+		// 	document.documentElement.removeChild(WVJBIframe);
+		// }, 0);
+		// console.log("tag", "ios");
+		// sessionStorage.phoneType = "ios";
 		if (window.WebViewJavascriptBridge) {
-			return callback(window.WebViewJavascriptBridge);
+			return callback(WebViewJavascriptBridge);
 		}
 		if (window.WVJBCallbacks) {
 			return window.WVJBCallbacks.push(callback);
@@ -31,13 +47,11 @@ function setupWebViewJavascriptBridge(callback) {
 		window.WVJBCallbacks = [callback];
 		var WVJBIframe = document.createElement("iframe");
 		WVJBIframe.style.display = "none";
-		WVJBIframe.src = "wvjbscheme://__BRIDGE_LOADED__";
+		WVJBIframe.src = "https://__bridge_loaded__";
 		document.documentElement.appendChild(WVJBIframe);
-		setTimeout(() => {
+		setTimeout(function() {
 			document.documentElement.removeChild(WVJBIframe);
 		}, 0);
-		console.log("tag", "ios");
-		sessionStorage.phoneType = "ios";
 	}
 }
 //注册回调函数，第一次连接时调用 初始化函数(android需要初始化,ios不用)

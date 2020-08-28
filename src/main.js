@@ -16,7 +16,6 @@ Vue.config.productionTip = false;
 // 判断当前设备
 let isAndroid = navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Adr") > -1;
 let isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-console.log("isAndroid", isAndroid, isiOS);
 // 判断设备
 storage.set("device", isAndroid);
 

@@ -3,8 +3,7 @@ import { getToken } from "../utils/auth";
 import storage from "../utils/storage";
 import wx from "weixin-js-sdk";
 import store from "../store";
-// import Bridge from "../utils/JSbridge.js";
-
+import jsBridgeApp from "../utils/util.js";
 const env = process.env.NODE_ENV;
 let baseURL = "";
 if (env === "development") {
@@ -57,7 +56,6 @@ const createService = (customization) => {
 			// }
 			if (code == 406 || code == 401) {
 				let getTabIdx = store.getters["getTabIdx"];
-				// alert("getTabIdx", getTabIdx);
 				if (getTabIdx == 1) {
 				} else {
 					let pladFormId = storage.get("pladFormId");
@@ -68,6 +66,7 @@ const createService = (customization) => {
 					} else {
 						// alert(1);
 						// 返回app的登录页
+						jsBridgeApp("webLogin", {});
 					}
 				}
 
