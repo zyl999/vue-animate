@@ -174,7 +174,7 @@ export default {
 			max-width: 100px;
 			transition: all 0.5s;
 			&.fw1 {
-				width: 81px;
+				width: 74px;
 			}
 			&.f2 {
 				width: 100px;
