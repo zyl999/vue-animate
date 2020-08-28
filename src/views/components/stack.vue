@@ -250,12 +250,17 @@ export default {
       // 更新进度条
       let pageGress = (currentpage / this.pages.length) * 100;
       // 处理获取喜欢、不喜欢的值
-      console.log(this.temporaryData.lastRotate, "获取偏移值");
+      console.log(
+        this.temporaryData.lastRotate,
+        "获取偏移值",
+        this.temporaryData.lastPosWidth
+      );
       let data = JSON.parse(
         JSON.stringify(this.pages[this.temporaryData.currentPage])
       );
       delete data.url;
-      if (this.temporaryData.lastRotate > 0) {
+      // lastRotate 用这个判断不准确 手动滑动时不喜欢会为负的
+      if (this.temporaryData.lastPosWidth < 0) {
         // 不喜欢，往左滑动
         Object.assign(data, { likeFlag: false });
       } else {

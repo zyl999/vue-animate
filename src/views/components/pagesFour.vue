@@ -88,7 +88,7 @@ export default {
           let categoryName = [];
           let explanation = res.result.explanation;
           this.explanation = explanation;
-          this.explanation.result = explanation.result.split("，");
+          this.explanation.result = explanation.result.split("、");
           this.explanation.category_name = explanation.category_name.split("");
           this.score_list = res.result.score_list.slice(0, 5);
           let scorArr = [];
