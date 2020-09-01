@@ -31,6 +31,7 @@
 import detectPrefixes from "../../utils/detect-prefixes.js";
 import Bus from "../../utils/bus";
 import imgSlime from "./imgSlime";
+import store from "../../utils/storage";
 export default {
   props: {
     stackinit: {
@@ -74,8 +75,10 @@ export default {
         swipe: false,
         zIndex: 10,
       },
+      device: store.get("device"),
       limit: false, // 限制上下滑动能否划出范围
       choosedList: [], // 划过的列表，里面装着喜欢和不喜欢的图片信息
+      maskArr: [2.8, 1.8],
     };
   },
   computed: {
@@ -99,6 +102,7 @@ export default {
   },
   mounted() {
     console.log("window", window.devicePixelRatio);
+    this.maskArr = this.device ? [1.5, 1] : [2.8, 1.8];
     // 绑定事件
     this.$on("next", () => {
       this.next();
@@ -237,7 +241,6 @@ export default {
         this.temporaryData.opacity = 0;
         this.temporaryData.swipe = true;
         this.nextTick();
-        // 不满足条件则滑入
       } else {
         this.temporaryData.poswidth = 0;
         this.temporaryData.posheight = 0;
@@ -387,10 +390,10 @@ export default {
         style["opacity"] = "1";
         style["transform"] =
           "translate3D(0," +
-          -2.8 * 60 * (perIndex - this.offsetRatio) +
+          -this.maskArr[0] * 60 * (perIndex - this.offsetRatio) +
           "px" +
           "," +
-          -1.8 * 60 * (perIndex - this.offsetRatio) +
+          -this.maskArr[1] * 60 * (perIndex - this.offsetRatio) +
           "px" +
           ")";
         style["zIndex"] = visible - perIndex;
@@ -529,6 +532,7 @@ export default {
   -ms-user-select: none;
   user-select: none;
   pointer-events: auto;
+
   .icon {
     width: 110px;
     height: 110px;

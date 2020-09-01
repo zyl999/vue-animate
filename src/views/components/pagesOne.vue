@@ -104,29 +104,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @keyframes myfirst {
-//   0% {
-//     background: rgba(255, 166, 176, 0.5);
-//   }
-//   25% {
-//     background: rgba(255, 166, 176, 1);
-//   }
-//   50% {
-//     background: rgba(255, 166, 176, 0.5);
-//   }
-//   100% {
-//     background: rgba(255, 166, 176, 1);
-//   }
-// }
 @keyframes myfirst {
   0% {
     background: rgba(255, 166, 176, 1);
+    transform: scale(1);
+    // transform: scale(0.5);
+    // background: #ffffff;
   }
   50% {
     background: rgba(255, 166, 176, 0.5);
+    transform: scale(0.5);
+    // background: #ffffff;
   }
   100% {
     background: rgba(255, 166, 176, 1);
+    transform: scale(1);
+    // transform: scale(0.5);
+    // background: #ffffff;
   }
 }
 .wrap {
@@ -148,7 +142,7 @@ export default {
       // font-family: "PingFangSC-Regular, PingFang SC";
       font-family: PingFang SC;
       margin-top: 14px;
-      opacity: 0.8;
+      opacity: 0.6;
     }
   }
   .center {
@@ -174,10 +168,10 @@ export default {
       align-items: center;
       justify-content: center;
       position: absolute;
-      opacity: 0.8;
+      opacity: 0.6;
       i {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
         animation: myfirst 1.5s ease infinite normal;
       }
@@ -192,19 +186,19 @@ export default {
     }
     .in {
       &.in0 {
-        right: 200px;
-        top: 120px;
+        right: 199px;
+        top: 121px;
       }
       &.in1 {
-        right: 70px;
-        top: 262px;
+        right: 71px;
+        top: 264px;
       }
       &.in2 {
-        right: 168px;
+        right: 170px;
         bottom: 102px;
       }
       &.in3 {
-        left: 148px;
+        left: 146px;
         top: 362px;
       }
       &.in4 {
@@ -214,15 +208,15 @@ export default {
     }
     .out {
       &.out0 {
-        left: 276px;
-        top: 6px;
+        left: 274px;
+        top: 5px;
       }
       &.out1 {
-        right: 70px;
+        right: 69px;
         top: 48px;
       }
       &.out2 {
-        right: -8px;
+        right: -10px;
         top: 162px;
       }
       &.out3 {
@@ -242,19 +236,19 @@ export default {
         bottom: 34px;
       }
       &.out7 {
-        left: -16px;
-        top: 320px;
+        left: -18px;
+        top: 322px;
       }
       &.out8 {
         left: -24px;
         top: 212px;
       }
       &.out9 {
-        left: 24px;
+        left: 26px;
         top: 102px;
       }
       &.out10 {
-        left: 114px;
+        left: 115px;
         top: 22px;
       }
     }

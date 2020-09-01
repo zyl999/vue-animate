@@ -16,27 +16,29 @@
     <div class="controls">
       <div class="left">
         <div class="button" @click="prev">
+          <!-- :class="{
+						  fw1: !like && progessPositon > 0.0002,
+							fw2: !like && progessPositon > 0.6,
+          }"-->
           <img
             src="../../assets/no_like.png"
             alt
-            :class="{
-						  fw1: !like && progessPositon > 0.0001,
-							fw2: !like && progessPositon > 0.4,
-						}"
+            :style="{'transform':!like?scaleTransform:'scale(1)'}"
           />
         </div>
         <span>不喜欢</span>
       </div>
       <div class="left">
         <!-- :style="{ width: like ? radioW + 'px' : '54px' }" -->
+        <!-- :class="{
+							fw1: like && progessPositon > 0.0002,
+							fw2: like && progessPositon > 0.6,
+        }"-->
         <div class="button" @click="next">
           <img
             src="../../assets/like.png"
-            :class="{
-							fw1: like && progessPositon > 0.0001,
-							fw2: like && progessPositon > 0.4,
-						}"
             alt
+            :style="{'transform':like?scaleTransform:'scale(1)'}"
           />
         </div>
         <span>喜欢</span>
@@ -79,6 +81,18 @@ export default {
     stack,
     nprogress,
   },
+  computed: {
+    scaleTransform() {
+      let temp =
+        this.progessPositon > 0 && this.progessPositon < 0.5
+          ? 2
+          : this.progessPositon * 2 + 1;
+      console.log("temp", temp);
+      temp = temp > 2 ? 1.8 : temp;
+      // console.log("dd", temp);
+      return `scale(${temp})`;
+    },
+  },
   methods: {
     getImgList() {
       this.$ajax(api_getImgList, {}).then((res) => {
@@ -116,8 +130,10 @@ export default {
         return;
       }
       this.progessPositon = progess; //控制爱心的大小
-      console.log("progess", this.progessPositon, this.like);
-      this.$set(this.someList[idx], label, progess * 2);
+      if (progess > 0.0001) {
+        progess = 1;
+      }
+      this.$set(this.someList[idx], label, progess);
     },
   },
 };
@@ -139,6 +155,7 @@ export default {
   pointer-events: none;
   // overflow: hidden;
   // border-radius: 20px;
+  touch-action: none;
 }
 
 .controls {
@@ -170,7 +187,7 @@ export default {
       // height: 46px;
       height: auto;
       max-width: 100px;
-      transition: all 0.8s;
+      transition: all 0.5s;
       &.fw1 {
         // width: 74px;
         transform: scale(1.3);
