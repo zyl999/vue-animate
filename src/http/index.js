@@ -11,7 +11,8 @@ if (env === "development") {
 	baseURL = "/api";
 } else if (env === "production") {
 	// 生产环境
-	baseURL = "https://hj-service.51hejia.com";
+  // baseURL = "https://hj-service.51hejia.com";
+  baseURL = "/api";
 } else if (env === "test") {
 	// 测试环境
 	// baseURL = "https://test-api.jbh58.com";

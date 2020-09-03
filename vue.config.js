@@ -34,5 +34,7 @@ module.exports = {
 			},
 		},
 	},
-	lintOnSave: false,
+  lintOnSave: false,
+  // assetsDir: 'style',
+  publicPath:process.env.BASE_URL
 };
