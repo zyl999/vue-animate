@@ -1,18 +1,20 @@
 <template>
   <div class="wrap">
-    <div class="title">
-      <div class="f1">我家适合什么风格？</div>
-      <div class="f2">人工智能小虎AI更懂你</div>
-    </div>
-    <div class="center">
-      <img class="img" src="../../assets/login_icon.png" alt />
-      <div class="in" v-for="(label, idx) in inArr" :key="inKey[idx]" :class="'in' + idx">
-        <i></i>
-        <span>{{ label }}</span>
+    <div class="block">
+      <div class="title">
+        <div class="f1">我家适合什么风格？</div>
+        <div class="f2">人工智能小虎AI更懂你</div>
       </div>
-      <div class="out" v-for="(label, idx) in outArr" :key="outKey[idx]" :class="'out' + idx">
-        <i></i>
-        <span>{{ label }}</span>
+      <div class="center">
+        <img class="img" src="../../assets/login_icon.png" alt />
+        <div class="in" v-for="(label, idx) in inArr" :key="inKey[idx]" :class="'in' + idx">
+          <i></i>
+          <span>{{ label }}</span>
+        </div>
+        <div class="out" v-for="(label, idx) in outArr" :key="outKey[idx]" :class="'out' + idx">
+          <i></i>
+          <span>{{ label }}</span>
+        </div>
       </div>
     </div>
     <div class="bottom">
@@ -125,6 +127,18 @@ export default {
 }
 .wrap {
   padding-top: 100px;
+  width: 750px;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+  .block{
+    width: 100%;
+    height: calc(100vh - 400px);
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  }
   .title {
     width: 100%;
     color: #ffffff;

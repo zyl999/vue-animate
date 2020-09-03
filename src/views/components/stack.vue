@@ -21,8 +21,8 @@
         <img v-else src="../../assets/like.png" alt />
       </div>
       <div class="img_wrap">
-        <!-- <img :src="item.url + '?imageMogr2/thumbnail/620x880'" :alt="index" :style="{ opacity: item.opacity }" /> -->
-        <imgSlime :src="item.url" :opacity="item.opacity" :w="310" :h="440" />
+        <img :src="item.url" :alt="index" :style="{ opacity: item.opacity }" />
+        <!-- <imgSlime :src="item.url" :opacity="item.opacity" :w="310" :h="440" /> -->
       </div>
     </li>
   </ul>

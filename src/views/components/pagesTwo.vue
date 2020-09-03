@@ -2,17 +2,20 @@
   <div class="wrap">
     <!-- 进度条 -->
     <nprogress :h="4" :w="npgressW" bgc="rgba(255, 255, 255, 0.2)" parentBgc="#171d26" />
-    <div class="title"></div>
-    <div class="stack-wrapper">
-      <stack
-        ref="stack"
-        :pages="someList"
-        :stackinit="stackinit"
-        @progressHandle="progressHandle"
-        @change="changeHandel"
-        :like.sync="like"
-      ></stack>
+    <!-- <div class="title"></div> -->
+    <div class="block">
+       <div class="stack-wrapper">
+        <stack
+          ref="stack"
+          :pages="someList"
+          :stackinit="stackinit"
+          @progressHandle="progressHandle"
+          @change="changeHandel"
+          :like.sync="like"
+        ></stack>
+      </div>
     </div>
+    
     <div class="controls">
       <div class="left">
         <div class="button" @click="prev">
@@ -140,9 +143,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrap {
-  .title {
-    height: 84px;
-  }
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+.block{
+  width: 100%;
+  height: calc(100vh - 220px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .stack-wrapper {
   margin: 0 auto;
@@ -159,7 +171,7 @@ export default {
 }
 
 .controls {
-  margin-top: 60px;
+  // margin-top: 60px;
   display: flex;
   padding: 0px 146px;
   align-items: center;

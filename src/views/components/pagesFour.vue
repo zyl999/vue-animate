@@ -185,6 +185,7 @@ export default {
   overflow: hidden;
   width: 100%;
   box-sizing: border-box;
+
 }
 .center{
   width: 100%;
@@ -324,6 +325,8 @@ export default {
   justify-content: space-between;
   padding: 0px 66px;
   margin-top: 20px;
+  padding-bottom: constant(safe-area-inset-bottom);
+	padding-bottom: env(safe-area-inset-bottom);
   .left,
   .center {
     display: flex;
