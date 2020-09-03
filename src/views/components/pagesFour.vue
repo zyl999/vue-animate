@@ -1,6 +1,7 @@
 <template>
-  <div class="card_wrap" :class="{long:longFlag}">
-    <div class="card">
+  <div class="card_wrap">
+    <div class="center">
+      <div class="card">
       <div class="title">
         <span>{{ userInfo.nick_name }}</span> 的风格测试结果
       </div>
@@ -28,6 +29,7 @@
           class="avater"
         />
       </div>
+    </div>
     </div>
     <div class="button" @click="resetTest">
       <div class="left">
@@ -78,9 +80,6 @@ export default {
   created() {
     this.result();
     document.title = "测试结果"; 
-    let rate=window.screen.height/window.screen.width;
-    console.log('长宽比',rate);
-    this.longFlag =rate && rate > 2 ? true :false
   },
   methods: {
     result() {
@@ -181,10 +180,20 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card_wrap {
-  padding-top: 30px;
-  &.long{
-    padding-top: 160px;
-  }
+  // padding-top: 30px;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+.center{
+  width: 100%;
+  height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  // border: 1px solid red;
 }
 .card {
   width: 620px;
@@ -314,7 +323,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0px 66px;
-  margin-top: 40px;
+  margin-top: 20px;
   .left,
   .center {
     display: flex;
