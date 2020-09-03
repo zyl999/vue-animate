@@ -1,5 +1,5 @@
 <template>
-  <div class="card_wrap">
+  <div class="card_wrap" :class="{long:longFlag}">
     <div class="card">
       <div class="title">
         <span>{{ userInfo.nick_name }}</span> 的风格测试结果
@@ -63,6 +63,7 @@ export default {
         nick_name: "",
         user_img: "",
       },
+      longFlag:false,
       device: store.get("device"),
       userName: "郭仙女",
       arr: ["现代简约", "美式", "欧式", "地中海", "日式"],
@@ -76,7 +77,10 @@ export default {
   },
   created() {
     this.result();
-    document.title = "测试结果";
+    document.title = "测试结果"; 
+    let rate=window.screen.height/window.screen.width;
+    console.log('长宽比',rate);
+    this.longFlag =rate && rate > 2 ? true :false
   },
   methods: {
     result() {
@@ -178,6 +182,9 @@ export default {
 <style lang="scss" scoped>
 .card_wrap {
   padding-top: 30px;
+  &.long{
+    padding-top: 160px;
+  }
 }
 .card {
   width: 620px;
