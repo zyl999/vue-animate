@@ -8,8 +8,9 @@ const jsBridgeApp = (methodName, data, cb) => {
 		if (isiOS) {
 			window.webkit.messageHandlers[methodName].postMessage(data);
 		} else {
-			// 安卓
-			window.WebViewJavascriptBridge.callHandler(methodName, data, cb ? cb() : null);
+      // 安卓
+      // alert(1111)
+			window.WebViewJavascriptBridge.callHandler(methodName, data, cb ? cb() : null); 
 		}
 	} catch (e) {}
 };

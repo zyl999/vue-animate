@@ -46,6 +46,7 @@ export default {
       this.choosedList = data;
     });
     setToken(""); //先清空token值
+    store.set("pladFormId", -1);
     //获取地址栏的值
     let data = window.location.search.substr(1);
     data = decodeURIComponent(data);

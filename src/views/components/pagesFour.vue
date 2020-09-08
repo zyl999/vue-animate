@@ -31,12 +31,12 @@
       </div>
     </div>
     </div>
-    <div class="button" @click="resetTest">
-      <div class="left">
+    <div class="button">
+      <div class="left" @click.stop="resetTest">
         <img src="../../assets/menue.png" alt />
         <span>重新测试</span>
       </div>
-      <div class="center" v-if="pladFormId != 4" @click.stop="share">
+      <div class="buttonCenter" v-if="pladFormId != 4" @click.stop="share">
         <img src="../../assets/share.png" alt />
         <span>分享</span>
       </div>
@@ -194,7 +194,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // border: 1px solid red;
 }
 .card {
   width: 620px;
@@ -325,10 +324,9 @@ export default {
   justify-content: space-between;
   padding: 0px 66px;
   margin-top: 20px;
-  padding-bottom: constant(safe-area-inset-bottom);
-	padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
   .left,
-  .center {
+  .buttonCenter {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -337,20 +335,15 @@ export default {
     font-family: "PingFangSC-Regular,PingFang SC";
     color: #ffffff;
     position: relative;
+    
     img {
       width: 44px;
       height: 44px;
       margin-bottom: 6px;
     }
-    button {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-    }
   }
   .right {
+    display: inline-block;
     width: 400px;
     height: 90px;
     border-radius: 10px;

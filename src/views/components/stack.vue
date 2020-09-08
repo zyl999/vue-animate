@@ -550,6 +550,7 @@ export default {
     img {
       width: 54px;
       height: 46px;
+      object-fit: contain;
     }
   }
 }

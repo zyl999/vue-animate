@@ -59,13 +59,13 @@ const createService = (customization) => {
 				let getTabIdx = store.getters["getTabIdx"];
 				if (getTabIdx == 1) {
 				} else {
-					let pladFormId = storage.get("pladFormId");
+          let pladFormId = storage.get("pladFormId");
 					// alert(pladFormId);
 					// token 无效
 					if (pladFormId == 4) {
 						wx.miniProgram.navigateTo({ url: "/pages/login/login?source=webView" });
 					} else {
-						// alert(1);
+						// alert('未登录');
 						// 返回app的登录页
 						jsBridgeApp("webLogin", {});
 					}
