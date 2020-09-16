@@ -36,10 +36,10 @@
         <img src="../../assets/menue.png" alt />
         <span>重新测试</span>
       </div>
-      <div class="buttonCenter" v-if="pladFormId != 4" @click.stop="share">
+      <!-- <div class="buttonCenter" v-if="pladFormId != 4" @click.stop="share">
         <img src="../../assets/share.png" alt />
         <span>分享</span>
-      </div>
+      </div> -->
       <div class="right" @click.stop="goDesigner">找设计师咨询方案</div>
     </div>
   </div>
