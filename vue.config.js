@@ -25,7 +25,7 @@ module.exports = {
 	devServer: {
 		proxy: {
 			"/api": {
-				target: "https://test-api.jbh58.com",
+				target: "https://hj-service-test.51hejia.com",
 				ws: true,
 				changeOrigin: true,
 				pathRewrite: {

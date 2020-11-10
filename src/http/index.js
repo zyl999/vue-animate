@@ -63,7 +63,11 @@ const createService = (customization) => {
 					// alert(pladFormId);
 					// token 无效
 					if (pladFormId == 4) {
-						wx.miniProgram.navigateTo({ url: "/pages/login/login?source=webView" });
+            wx.miniProgram.navigateTo({ url: "/pages/login/login?source=webView" });
+            // 百度小程序跳转
+            if (/swan\//.test(window.navigator.userAgent) || /^webswan-/.test(window.name)) {  
+              swan.webView.redirectTo({url: '/pages_my/mobileLogin/mobileLogin?source=webView'})
+            }
 					} else {
 						// alert('未登录');
 						// 返回app的登录页
